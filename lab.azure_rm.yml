@@ -1,0 +1,15 @@
+---
+- name: This is for Dynamic Inventory
+  hosts: local
+  connection: local
+  collections:
+  - name: azure.azcollection
+  plugin: azure_rm
+  auth_source: env
+  plain_host_names: yes
+  include_vm_resource_groups:
+  - HI4142-PoC-RG-05Jul22
+  hostvar_expressions:
+    ansible_host: private_ipv4_addresses | first
+  conditional_groups:
+    all_hosts_group: true
